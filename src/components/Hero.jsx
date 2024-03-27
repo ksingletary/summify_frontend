@@ -1,25 +1,18 @@
-import logo from '../assets/logo.svg';
-// import Login from './login';
-// import Signup from './signup';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Navbar from './Navbar';
+import Login from './Login';
 
 const Hero = () => {
   return (
-    <header className='w-full flex 
+    <div className='w-full flex 
     justify-center items-center flex-col'>
-        <nav className='flex justify-between
-        items-center w-full mb-10 pt-3'>
-            <img src={logo} alt="summify_logo" className='w-28 object-contain' />
-            <button 
-                type='button'
-                className='black_btn'>               
-                Login
-            </button>
-            <button 
-                type='button'
-                className='black_btn'>                        
-                Signup
-            </button>
-        </nav>
+        <Router>
+            <Navbar />
+            <Routes>
+                <Route path="/login" element={<Login />} />
+                {/* Other routes go here */}
+            </Routes>
+        </Router>
 
         <h1 className='head_text'>
             Summarize Articles with <br className='max-md:hidden' />
@@ -30,7 +23,7 @@ const Hero = () => {
         Streamline your reading experience with Summify, an article summarizer 
         designed to condense lengthy articles into clear and concise summaries.
         </h2>
-    </header>
+    </div>
   )
 }
 
