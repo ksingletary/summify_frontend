@@ -3,13 +3,18 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between shadow-lg items-center w-full mb-10 bg-slate-500">
+    <nav className="flex justify-between shadow-lg items-center w-full mb-10 bg-slate-100">
       <div>
+        <Link to='/' variant="button">
         <img src={logo} alt="summify_logo" className='w-28 object-contain' />
+        </Link>
       </div>
-      <div className='flex justify-between items-center mb-10 pt-3'>
-        <Link to="/login" className="black_btn mr-36">Login</Link>
-        <Link to="/signup" className="black_btn mr-6">Signup</Link>
+      <div className='flex justify-between items-center mb-6 pt-3'>
+        <Link to="/" className="mr-10 hover:text-orange-500">Home</Link>
+        <Link to="/" className="mr-10 hover:text-orange-500">About</Link>
+        <Link to="/login" className="mr-10 hover:text-orange-500">Login</Link>
+        <Link to="/signup" className="mr-10 hover:text-orange-500">Signup</Link>
+        <Link to="/" className="mr-10 hover:text-orange-500">Username</Link>
       </div>
     </nav>
   );

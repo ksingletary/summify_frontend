@@ -69,6 +69,23 @@
   }
 }
 
+/* Dark mode styles */
+.dark-mode {
+  background-color: #1a202c;
+  color: #ffffff;
+}
+
+/* Button styles */
+.dark-mode-toggle {
+  background-color: #ffffff;
+  color: #1a202c;
+  padding: 8px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+
 /* Tailwind Styles */
 
 .app {
