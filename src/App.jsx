@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Hero from './components/Hero'
 import Demo from './components/Demo'
 import './App.css'
@@ -6,23 +6,71 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Login from './components/Login';
 import Signup from './components/Signup';
-import DarkModeToggle from './components/DarkMode';
+import { jwtDecode } from "jwt-decode";
+import SummifyApi from "../api";
+import UserContext from "./context/UserContext";
+import DarkModeToggle from './components/DarkModeToggle';
 
 
 const App = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false);
+
+  const LOCAL_STORAGE_KEY = 'token'
+  const [currentUser, setCurrentUser] = useState("")
+
+   // Create and store current user state.
+  // By default, will retrieve user from local storage. If user is null, then return an empty object.  Otherwise, parse the object and return it as currentUser.
+  const [token, setToken] = useState(() => {
+    try {
+      const value = localStorage.getItem(LOCAL_STORAGE_KEY);
+      if (value == null) return null;
+      //   console.log("retrieved from localStorage:", value);
+      return JSON.parse(value);
+    } catch (error) {
+      console.log("error retrieving token:", error);
+    }
+  });
+
+  useEffect( () => {
+    async function updateUserUponToken(token){
+      // console.log('running updateUserUponToken. TOKEN:', token)
+      setCurrentUser(() => {
+
+        if(!token) return // if there is no token, Return without trying to decode it.
+        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(token)); // persist the token in local storage
+
+        let decodedToken = jwtDecode(token)
+
+        SummifyApi.token = token
+        return decodedToken
+      })
+    }
+    updateUserUponToken(token)
+  },[token])
+
+
+  const context = {
+    currentUser: null,
+    setToken,
+    isDarkMode, 
+    setIsDarkMode,
+    LOCAL_STORAGE_KEY
+  }
 
   return (
-    <Router>
-      <DarkModeToggle />
-      <Navbar />
-      <Routes>
-        <Route path="/" element={<Hero setIsHeroVisible={setIsHeroVisible} />} />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-      </Routes>
-      {isHeroVisible && <Demo />}
-    </Router>
+    <UserContext.Provider value={context}>
+      <Router>
+        <Navbar/>
+        <DarkModeToggle />
+        <Routes>
+          <Route path="/" element={<Hero setIsHeroVisible={setIsHeroVisible} />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+        </Routes>
+        {isHeroVisible && <Demo />}
+      </Router>
+    </UserContext.Provider>
   );
 }
 

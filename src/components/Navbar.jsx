@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between shadow-lg items-center w-full mb-10 bg-slate-100">
+    <nav className={`flex justify-between shadow-lg items-center w-full mb-10 `}>
       <div>
         <Link to='/' variant="button">
         <img src={logo} alt="summify_logo" className='w-28 object-contain' />
@@ -16,6 +16,7 @@ const Navbar = () => {
         <Link to="/signup" className="mr-10 hover:text-orange-500">Signup</Link>
         <Link to="/" className="mr-10 hover:text-orange-500">Username</Link>
       </div>
+      
     </nav>
   );
 }

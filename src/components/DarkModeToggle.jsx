@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
+import UserContext from '../context/UserContext';
 
 const DarkModeToggle = () => {
   // State to track the current mode (light or dark)
-  const [isDarkMode, setIsDarkMode] = useState(false);
+  const { isDarkMode, setIsDarkMode } = useContext(UserContext);
 
   // Function to toggle between light and dark mode
   const toggleDarkMode = () => {
@@ -16,11 +17,12 @@ const DarkModeToggle = () => {
     } else {
       document.body.classList.remove('dark-mode');
     }
+    
   }, [isDarkMode]);
 
   return (
     <button
-      className="dark-mode-toggle"
+      className="dark-mode-toggle ml-3"
       onClick={toggleDarkMode}
     >
       {isDarkMode ? 'Light Mode' : 'Dark Mode'}
