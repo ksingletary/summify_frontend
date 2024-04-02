@@ -37,18 +37,18 @@ const Signup = () => {
     e.preventDefault();
     await submitForm(formData);
     console.log("submit successful!");
-    setFormData(INITIAL_FORM_DATA); // Removed unnecessary function wrapper
+    setFormData(INITIAL_FORM_DATA); 
   };
 
   return (
     <section className={`bg-gray-50 min-h-screen flex items-center justify-center ${isDarkMode ? 'dark-mode' : ''}`}>
       {/* Signup container */}
-      {currentUser &&  <Navigate to='/' replace={true}/>}
-      <div className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center w-full">
+      {currentUser && <Navigate to='/' replace />}
+      <div id={`${isDarkMode ? 'div-form-dark' : ''}`} className="bg-gray-100 flex rounded-2xl shadow-lg max-w-3xl p-5 items-center w-full">
         {/* form */}
         <div className="w-full px-8 md:px-16">
           <h2 className="font-bold text-2xl text-[#d26e3f]">Signup</h2>
-          <p className="text-xs mt-4 text-[#002D74]">Create a new account</p>
+          <p className="text-xs mt-4">Create a new account</p>
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input
@@ -105,7 +105,7 @@ const Signup = () => {
             <hr className="border-gray-400" />
           </div>
 
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300 text-[#002D74]">
+          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300">
             Continue as Guest
           </button>
         </div>

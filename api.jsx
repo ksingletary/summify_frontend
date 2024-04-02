@@ -58,12 +58,7 @@ static async getUserByUsername(username) {
     let res = await this.request(`auth/login`,formData,'post');
     return res.token;
   }
-//   // get a specific user profile
-  static async getProfile(username) {
-    let res = await this.request(`users/${username}`);
-    // setAuthorizationToken(res.token)
-    return res.user;
-  }
+
 }
 
   export default SummifyApi;

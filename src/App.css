@@ -70,9 +70,19 @@
 }
 
 /* Dark mode styles */
-.dark-mode {
+.dark-mode{
   background-color: #1a202c;
   color: #ffffff;
+}
+
+#white-header_text{
+  color: #ffffff;
+}
+
+#div-form-dark {
+  --tw-bg-opacity: 1;
+  background-color: rgb(75 85 99 / var(--tw-bg-opacity));
+  color: black;
 }
 
 /* Button styles */
@@ -85,6 +95,12 @@
   cursor: pointer;
 }
 
+.sun-moon-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
 
 
 /* Tailwind Styles */

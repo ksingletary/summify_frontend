@@ -1,5 +1,6 @@
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import UserContext from '../context/UserContext';
+import { FiSun,FiMoon } from "react-icons/fi";
 
 const DarkModeToggle = () => {
   // State to track the current mode (light or dark)
@@ -22,10 +23,10 @@ const DarkModeToggle = () => {
 
   return (
     <button
-      className="dark-mode-toggle ml-3"
+      className="dark-mode-toggle ml-3 sun-moon-toggle text-4xl fixed top-0 right-0 m-4 p-2 mt-32 hover:text-orange-500 "
       onClick={toggleDarkMode}
     >
-      {isDarkMode ? 'Light Mode' : 'Dark Mode'}
+      {isDarkMode ? <FiMoon color="#ffffff" /> : <FiSun color="#1a202c" />}
     </button>
   );
 };

@@ -1,6 +1,9 @@
-import React, { useEffect } from 'react';
+import { useEffect, useContext } from 'react';
+import UserContext from "../context/UserContext";
 
 const Hero = ({ setIsHeroVisible }) => {
+  const {isDarkMode } = useContext(UserContext);
+
   useEffect(() => {
     setIsHeroVisible(true);
     return () => {
@@ -10,7 +13,7 @@ const Hero = ({ setIsHeroVisible }) => {
 
   return (
     <header className='w-full flex justify-center items-center flex-col'>
-      <h1 className='head_text'>
+      <h1 id={`${isDarkMode ? 'white-header_text' : ''}`} className='head_text'>
         Summarize Articles with <br className='max-md:hidden' />
         <span className='orange_gradient'>OpenAI GPT-4</span>
       </h1>

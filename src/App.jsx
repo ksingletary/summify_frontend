@@ -10,11 +10,13 @@ import { jwtDecode } from "jwt-decode";
 import SummifyApi from "../api";
 import UserContext from "./context/UserContext";
 import DarkModeToggle from './components/DarkModeToggle';
+import UserProfile from './components/UserProfile';
 
 
 const App = () => {
   const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
+  const [allArticles, setAllArticles] = useState([]);
 
   const LOCAL_STORAGE_KEY = 'token'
   const [currentUser, setCurrentUser] = useState("")
@@ -51,7 +53,7 @@ const App = () => {
 
 
   const context = {
-    currentUser: null,
+    currentUser: token ? jwtDecode(token) : null,
     setToken,
     isDarkMode, 
     setIsDarkMode,
@@ -67,8 +69,12 @@ const App = () => {
           <Route path="/" element={<Hero setIsHeroVisible={setIsHeroVisible} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
+          {currentUser &&
+            <><Route path={`/user/${currentUser.username}`} element={<UserProfile allArticles={allArticles} />} />
+            </>
+          }
         </Routes>
-        {isHeroVisible && <Demo />}
+        {isHeroVisible && <Demo allArticles={allArticles} setAllArticles={setAllArticles} />}
       </Router>
     </UserContext.Provider>
   );
