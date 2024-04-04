@@ -29,7 +29,7 @@ const Signup = () => {
       setToken(res);
     } catch (error) {
       console.log(error);
-      setErrorMessage(error);
+      setErrorMessage(errorMessage);
     }
   };
 

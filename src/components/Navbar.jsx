@@ -19,7 +19,7 @@ const Navbar = () => {
   }
 
   return (
-    <nav className={`flex justify-between shadow-lg items-center w-full mb-10 `}>
+    <nav className='flex justify-between shadow-lg items-center w-full mb-10 font-satoshi'>
       <div>
         <Link to='/' variant="button">
         <img src={logo} alt="summify_logo" className='w-28 object-contain' />

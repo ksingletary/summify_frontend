@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import Hero from './components/Hero'
 import Demo from './components/Demo'
 import './App.css'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
@@ -14,7 +13,7 @@ import UserProfile from './components/UserProfile';
 
 
 const App = () => {
-  const [isHeroVisible, setIsHeroVisible] = useState(true);
+  // const [isHeroVisible, setIsHeroVisible] = useState(true);
   const [isDarkMode, setIsDarkMode] = useState(false);
   const [allArticles, setAllArticles] = useState([]);
 
@@ -66,7 +65,7 @@ const App = () => {
         <Navbar/>
         <DarkModeToggle />
         <Routes>
-          <Route path="/" element={<Hero setIsHeroVisible={setIsHeroVisible} />} />
+          <Route path="/" element={<Demo allArticles={allArticles} setAllArticles={setAllArticles} />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           {currentUser &&
@@ -74,7 +73,6 @@ const App = () => {
             </>
           }
         </Routes>
-        {isHeroVisible && <Demo allArticles={allArticles} setAllArticles={setAllArticles} />}
       </Router>
     </UserContext.Provider>
   );
