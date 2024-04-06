@@ -25,7 +25,7 @@ const Signup = () => {
   const submitForm = async () => {
     try {
       const res = await SummifyApi.registerUser(formData);
-      console.log("RES FROM FORM SUBMIT", res);
+      console.log("Signed up successfully");
       setToken(res);
     } catch (error) {
       console.log(error);

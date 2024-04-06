@@ -14,11 +14,19 @@ const Demo = ({ allArticles, setAllArticles }) => {
   const [getSummary, { error, isFetching }] = useLazyGetSummaryQuery();
 
   useEffect(() => {
-    const articlesFromLocalStorage = JSON.parse(localStorage.getItem('articles'));
-    if (articlesFromLocalStorage) {
-      setAllArticles(articlesFromLocalStorage);
-    }
-  }, []);
+    const fetchArticlesFromLocalStorage = () => {
+      if (currentUser && currentUser.username) {
+        const articlesFromLocalStorage = JSON.parse(localStorage.getItem(currentUser.username));
+        if (articlesFromLocalStorage) {
+          setAllArticles(articlesFromLocalStorage);
+        }
+      }
+    };
+  
+    fetchArticlesFromLocalStorage();
+  }, []); // Empty dependency array to ensure useEffect runs only once on mount
+  
+  
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,17 +35,18 @@ const Demo = ({ allArticles, setAllArticles }) => {
     if (data?.summary) {
       const newArticle = { ...article, summary: data.summary };
       setArticle(newArticle);
-      if (currentUser) {
+      if (currentUser && currentUser.username) {
         // If user is logged in, add article to their profile
         const updatedAllArticles = [newArticle, ...allArticles];
         setAllArticles(updatedAllArticles);
-        localStorage.setItem('articles', JSON.stringify(updatedAllArticles));
+        localStorage.setItem(currentUser.username, JSON.stringify(updatedAllArticles));
       }
     }
   };
 
-  const handleLinkClick = () => {
-    // Handle navigation to another page here
+  const handleClearArticles = () => {
+    setAllArticles([]);
+    localStorage.removeItem(currentUser.username);
   };
 
   return (
@@ -121,6 +130,8 @@ const Demo = ({ allArticles, setAllArticles }) => {
             )
           )}
         </div>
+        {/* Button to clear articles */}
+        <button className="black_btn w-40 ml-48 mb-3 " onClick={handleClearArticles}>Clear Articles</button>
       </div>
     </section>
   );

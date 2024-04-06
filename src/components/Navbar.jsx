@@ -5,12 +5,15 @@ import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import SummifyApi from '../../api';
 
-const Navbar = () => {
+const Navbar = ({ handleClearArticles }) => {
 
   const navigate = useNavigate();
-  const {currentUser, token, setToken, LOCAL_STORAGE_KEY } = useContext(UserContext)
+  const { currentUser, token, setToken, LOCAL_STORAGE_KEY } = useContext(UserContext)
   
   function logout(){
+    // Clear articles when logging out
+    handleClearArticles();
+    
     SummifyApi.token = null
     localStorage.removeItem(LOCAL_STORAGE_KEY)
     setToken(() =>  null)
@@ -27,7 +30,7 @@ const Navbar = () => {
       </div>
       <div className='flex justify-between items-center mb-6 pt-3'>
         <Link to="/" className="mr-10 hover:text-orange-500">Home</Link>
-        <Link to="/" className="mr-10 hover:text-orange-500">About</Link>
+        <Link to="/about" className="mr-10 hover:text-orange-500">About</Link>
         
         {!currentUser &&
         <><Link to="/login" className="mr-10 hover:text-orange-500">Login</Link>

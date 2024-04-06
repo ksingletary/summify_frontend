@@ -1,7 +1,6 @@
-import React from 'react';
-import { linkIcon, loader, tick } from '../assets';
+import React, { useContext } from 'react';
+import { linkIcon } from '../assets';
 import UserContext from "../context/UserContext";
-import { useContext, useState } from "react";
 
 const UserProfile = ({ allArticles }) => {
   const { isDarkMode } = useContext(UserContext);
@@ -15,7 +14,6 @@ const UserProfile = ({ allArticles }) => {
 
   return (
     <section className='mt-16 w-full max-w-xl'>
-      {/* Display Summarized Articles */}
       <div className='flex flex-col w-full gap-2 ml-96'>
         <h2 className="text-2xl font-bold mb-4">Your Summarized Articles</h2>
         {uniqueArticles.length > 0 ? (
@@ -32,13 +30,13 @@ const UserProfile = ({ allArticles }) => {
                 </div>
                 <div className="border-t pt-2 mt-2">
                   <span className="text-sm">Summary:</span>
-                  <p id={`${isDarkMode ? 'white-header_text' : ''}`} className="text-gray-600">{article.summary}</p>
+                  <p className={`${isDarkMode ? 'text-white' : 'text-gray-600'}`}>{article.summary}</p>
                 </div>
               </li>
             ))}
           </ul>
         ) : (
-          <p className="text-gray-600">No summarized articles found.</p>
+          <p className={`${isDarkMode ? 'text-white' : 'text-gray-600'}`}>No summarized articles found.</p>
         )}
       </div>
     </section>

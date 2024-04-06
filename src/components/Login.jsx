@@ -21,7 +21,7 @@ const Login = () => {
   const submitForm = async () => {
     try {
       const res = await SummifyApi.loginUser(formData);
-      console.log("RES FROM FORM SUBMIT", res);
+      console.log("Logged in successfully");
       setToken(res);
     } catch (error) {
       console.log(error);
