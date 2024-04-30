@@ -93,21 +93,12 @@ const Signup = () => {
             />
             <button
               type="submit"
-              className="bg-[#d26e3f] rounded-xl text-white py-2 hover:scale-105 duration-300"
+              className="bg-[#d26e3f] rounded-xl text-white py-2 hover:scale-105 duration-300 mt-8"
             >
               Signup
             </button>
           </form>
 
-          <div className="mt-6 grid grid-cols-3 items-center text-gray-400">
-            <hr className="border-gray-400" />
-            <p className="text-center text-sm">OR</p>
-            <hr className="border-gray-400" />
-          </div>
-
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300">
-            Continue as Guest
-          </button>
         </div>
       </div>
     </section>

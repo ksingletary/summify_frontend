@@ -1,11 +1,14 @@
 import { useContext, useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link, Navigate } from 'react-router-dom';
 import SummifyApi from "../../api";
 import UserContext from "../context/UserContext";
-import { Navigate } from "react-router-dom";
 
 const Login = () => {
   const { setToken, currentUser, isDarkMode } = useContext(UserContext);
+  const GUEST_CREDENTIALS = {
+    username: "guestuser",
+    password: "guestpassword"
+  };
   const INITIAL_FORM_DATA = {
     username: "",
     password: ""
@@ -18,14 +21,14 @@ const Login = () => {
     setFormData((formData) => ({ ...formData, [name]: value }));
   };
 
-  const submitForm = async () => {
+  const submitForm = async (formData) => {
     try {
       const res = await SummifyApi.loginUser(formData);
       console.log("Logged in successfully");
       setToken(res);
     } catch (error) {
       console.log(error);
-      setErrorMessage(error);
+      setErrorMessage("Invalid username or password. Please try again.");
     }
   };
 
@@ -35,6 +38,11 @@ const Login = () => {
     setFormData(INITIAL_FORM_DATA);
   };
 
+  const handleContinueAsGuest = async () => {
+    setFormData(GUEST_CREDENTIALS);
+    await submitForm(GUEST_CREDENTIALS);
+  };
+
   return (
     <section className={`bg-gray-50 min-h-screen flex items-center justify-center ${isDarkMode ? 'dark-mode' : ''}`}>
       {currentUser &&  <Navigate to='/' replace={true}/>}
@@ -42,6 +50,8 @@ const Login = () => {
         <div className="w-full px-8 md:px-16">
           <h2 className="font-bold text-2xl text-[#d26e3f]">Login</h2>
           <p className="text-xs mt-4">If you are already a member, easily log in</p>
+
+          {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
           <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <input className="p-2 mt-8 rounded-xl border" 
@@ -73,7 +83,10 @@ const Login = () => {
             <hr className="border-gray-400"/>
           </div>
 
-          <button className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300">
+          <button 
+            onClick={handleContinueAsGuest} 
+            className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300"
+          >
             Continue as Guest
           </button>
 

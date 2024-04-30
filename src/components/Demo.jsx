@@ -110,7 +110,7 @@ const Demo = ({ allArticles, setAllArticles }) => {
           {isFetching ? (
             <img src={loader} alt="loader" className='w-20 h-20 object-contain'/>
           ) : error ? (
-            <p className='font-inter font-bold text-black text-center'>
+            <p id={`${isDarkMode ? 'white-header_text' : ''}`} className='font-inter font-bold text-black text-center'>
               Well, that wasn't supposed to happen...
               <br />
               <span className='font-satoshi font-normal'>
