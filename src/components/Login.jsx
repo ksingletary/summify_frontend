@@ -50,6 +50,7 @@ const Login = () => {
         <div className="w-full px-8 md:px-16">
           <h2 className="font-bold text-2xl text-[#d26e3f]">Login</h2>
           <p className="text-xs mt-4">If you are already a member, easily log in</p>
+          <p className="text-xs text-red-500">*please wait a few seconds for guestuser login</p>
 
           {errorMessage && <p className="text-red-500 text-sm">{errorMessage}</p>}
 
@@ -87,7 +88,7 @@ const Login = () => {
             onClick={handleContinueAsGuest} 
             className="bg-white border py-2 w-full rounded-xl mt-5 flex justify-center items-center text-sm hover:scale-105 duration-300"
           >
-            Continue as Guest
+            Continue as Guest 
           </button>
 
           <div className="mt-3 text-xs flex justify-between items-center">
