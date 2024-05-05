@@ -46,3 +46,32 @@ Database Schema
 The database schema can be found in the backend repository as "Summify_Schema.png".
 
 ## Set Up and Run
+
+To set up this project, ensure you have Nodejs, React, and PostgreSQL installed.
+
+    1. Clone the repository.
+   
+        git clone repository_url
+
+    2. Install Dependencies (Easier by setting up two terminals in VSCode) 
+
+        -cd frontend
+            npm i 
+
+        -cd backend
+            npm i
+
+    Set Up the Database:
+
+        -In backend
+            psql < summify.sql
+
+            psql -U postgres -d summify < summify-schema.sql
+
+    Run the Server.
+
+        -In frontend terminal
+            npm run dev
+
+        -In backend terminal
+            npm start
