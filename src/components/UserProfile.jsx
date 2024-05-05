@@ -16,6 +16,7 @@ const UserProfile = ({ allArticles }) => {
     <section className='mt-16 w-full max-w-xl'>
       <div className='flex flex-col w-full gap-2 ml-96'>
         <h2 className="text-2xl font-bold mb-4">Your Summarized Articles</h2>
+        <p className='text-red-700'>*if you refresh then go back home, your articles will reappear</p>
         {uniqueArticles.length > 0 ? (
           <ul className="space-y-4">
             {uniqueArticles.map((article, index) => (
