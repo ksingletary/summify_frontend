@@ -44,3 +44,5 @@ The project is structured into two main parts:
 
 Database Schema
 The database schema can be found in the backend repository as "Summify_Schema.png".
+
+## Set Up and Run
