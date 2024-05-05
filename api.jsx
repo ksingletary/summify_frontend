@@ -59,6 +59,24 @@ static async getUserByUsername(username) {
     return res.token;
   }
 
+    // Method to add a new article
+  static async addArticle(articleData) {
+    console.log("Sending article data:", articleData);
+
+    return await this.request(`articles/create`, articleData, 'post');
+  }
+  
+
+  // Get all articles for a specific user
+  static async getArticlesByUsername(username) {
+    return await this.request(`articles/${username}`);
+  }
+
+  // Get a specific article by username and article ID
+  static async getArticleById(username, articleId) {
+    return await this.request(`articles/${username}/${articleId}`);
+  }
+
 }
 
   export default SummifyApi;

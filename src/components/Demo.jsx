@@ -3,6 +3,7 @@ import { linkIcon, loader } from '../assets';
 import { useLazyGetSummaryQuery } from '../services/article';
 import UserContext from "../context/UserContext";
 import copy from '../assets/copy.svg';
+import SummifyApi from "../../api";
 
 const Demo = ({ allArticles, setAllArticles }) => {
   const [article, setArticle] = useState({
@@ -34,15 +35,44 @@ const Demo = ({ allArticles, setAllArticles }) => {
 
     if (data?.summary) {
       const newArticle = { ...article, summary: data.summary };
+
+      // Update local state and UI
       setArticle(newArticle);
+      const updatedAllArticles = [newArticle, ...allArticles];
+      setAllArticles(updatedAllArticles);
+
+      // Check if user is logged in
       if (currentUser && currentUser.username) {
-        // If user is logged in, add article to their profile
-        const updatedAllArticles = [newArticle, ...allArticles];
-        setAllArticles(updatedAllArticles);
-        localStorage.setItem(currentUser.username, JSON.stringify(updatedAllArticles));
+        try {
+          // Construct the payload correctly for the backend schema
+          
+          const articlePayload = {
+            username: currentUser.username,
+            articles: [{
+              article_url: newArticle.url,
+              summary: newArticle.summary
+            }]
+          };
+
+          // Add article to database via API
+          await SummifyApi.addArticle(articlePayload);
+          console.log('Article added successfully');
+
+          // Optionally update local storage or other client-side state
+          localStorage.setItem(currentUser.username, JSON.stringify(updatedAllArticles));
+        } catch (error) {
+          console.error('Failed to add article:', error);
+          // Handle errors here, such as by showing a user notification
+        }
       }
+    } else {
+      // Handle case where summary data is not available
+      console.error('No summary available');
+      // Optionally show an error message to the user
     }
   };
+
+
 
   const handleClearArticles = () => {
     setAllArticles([]);
